@@ -1,0 +1,262 @@
+.conteiner{
+    width: auto;
+    height: 100%;
+    padding:25px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    position: relative;
+}
+.logo{
+    width: 110px;
+    height: 120px;
+    margin: 0;
+    padding-left: 250px;
+    
+}
+.login{
+    float: right;
+    padding-left: 100px;
+}
+li{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    list-style-type: none;
+    padding-left: -20px;
+    font-size: small;
+}
+ul{
+    padding: 0px;
+    padding-right: 65px;
+}
+.caixa{
+    background-color: black;
+    border: solid 1px;
+    border-radius: 0px;
+    width: 565px;
+    height: 40px;
+    padding-left: 50px;
+    position: relative;
+}
+#txt{
+    font-size: medium;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    background-color: black;
+    border: none;
+    width: 250px;
+    padding: 10px 40px 5px 0px;
+}
+.lupa{
+    float: right;
+    background-color: white;
+    margin-top: 3px;
+    margin-right: 3px;
+    height: 34px;
+    width: 34px;
+}
+.zap2{
+    padding-left: 20px;
+}
+.carro{
+    height: 29px;
+    width: 29px;
+    padding-bottom: 29px;
+}
+.conteinerP{
+    background-color: black;
+    width: auto;
+    height: 100px;
+    padding: 0;
+    display: inline-flex;
+
+}
+.oferta{
+    font-size: medium;
+    height: 57px;
+    color: white;
+    padding-left: 35px;
+    text-align: center;
+
+}
+.promo{
+    padding-left: 35px;
+    height: 50px;
+    float: left;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+
+    text-align: center;
+}
+
+.promo1{
+    padding-left: 35px;
+    height: 50px;
+    float: left;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    margin-top: -10px;
+}
+
+.promo2{
+    padding-left: 35px;
+    height: 50px;
+    float: left;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    margin-top: -10px;
+}
+
+.promo3{
+    padding-left: 35px;
+    height: 50px;
+    float: left;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    margin-top: -10px;
+}
+
+.subir{
+    padding: 0px 34.5px 0px;
+}
+.imagemc{
+    width: auto;
+    padding: 0;
+    margin: 0;
+}
+.baixo{
+   display: flex;
+   padding-left: 250px;
+}
+
+.baixo2{
+    padding-right: 100px;
+}
+.cima{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    transition: trasnform 0.2s ease-in-out;
+}
+
+.baixob{
+    color: #767779;
+    transition: trasnform 0.2s ease-in-out;
+}
+
+.cad:hover{
+    color: gray;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.lup:hover{
+    cursor: pointer;
+}
+
+.num{
+    color: #8C4D18;
+}
+.num:hover{
+    color: black;
+    cursor: pointer;
+}
+
+.carro:hover{
+    cursor: pointer;
+}
+
+.oferta:hover{
+    color: #8C4D18;
+    text-decoration: overline;
+    cursor: pointer;
+}
+.promo:hover{
+    color: #8C4D18;
+    text-decoration: overline;
+    cursor: pointer;
+}
+
+.promo1:hover{
+    color: #8C4D18;
+    text-decoration: overline;
+    cursor: pointer;
+}
+
+.imagemc:hover{
+    cursor: pointer;
+}
+.baixo2{
+    display: flex;
+}
+
+.baixo2:hover{
+    transition: transform 0.2s ease-in-out;
+    transform: translateY(-5px);
+}
+
+.logo:hover{
+    cursor: pointer;
+}
+
+.icones:hover{
+    color: #8C4D18;
+    text-decoration: overline;
+    cursor: pointer;
+}
+
+.cartao{
+   margin-top: 12px;
+}
+
+.fiscal{
+    margin-top: -12px;
+}
+
+.baixinho{
+    margin-top: 5px;
+}
+
+.central{
+    margin: 0;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    padding: 0;
+}
+
+.bode{
+    margin: auto;
+    display: inline-block;
+}
+.lupa2{
+    position: fixed;
+}
+#rodape{
+    text-align: center;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+@media only screen and (max-width: 769px){
+    .conteiner{  
+    display: block;
+    flex-wrap: wrap;
+    justify-content: center;
+    }
+    .conteinerP{
+        display: none;
+    }
+    .imagemc{
+        display: none;
+    }
+
+    .baixo{
+        display: block;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
