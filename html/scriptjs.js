@@ -82,6 +82,7 @@ class Publicacoes {
     tilt.innerHTML = postagem.titulo;
     de.innerHTML = postagem.descricao;
     img.src = postagem.imagem;
+    img.alt = postagem.titulo;
     img.style.width = "300px";
     dataAt.innerHTML = postagem.data;
     exl.innerHTML = "Excluir";
