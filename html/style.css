@@ -66,7 +66,7 @@ ul{
 }
 .conteinerP{
     background-color: black;
-    width: auto;
+    width: 100%;
     height: 100px;
     padding: 0;
     position: absolute;
@@ -230,18 +230,63 @@ ul{
 }
 
 .bode{
-    margin: auto;
+    margin: 0;
     display: inline-block;
 }
 .lupa2{
-    position: fixed;
+    position: absolute;
 }
 #rodape{
     text-align: center;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
 }
+.testeDialog{
+    top: 50%;
+    left: 45%;
+    height: 300px;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    display: none;
+    background-color: beige;
+}
+#meubotao{
+    width: 8%;
+    left: 50%;
+}
 
+.titlebar{
+    clear: both;
+    margin: 0 0 55px;
+    position: relative;
+    width: 100%;
+    float: left;
+    text-align: center;
+}
+.post{
+    display: inline-block;
+    font-family:   Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: 650;
+    padding: 60px;
+}
+#ttbar{
+    clear: both;
+    font-family: "Montserrat",sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0px;
+    line-height: 1;
+    margin: 0 0 0px;
+    padding: 0px 15px;
+    color: #000;
+    width: auto !important;
+    float: none;
+    display: inline-block;
+    background: #fff;
+}
 @media  screen and (max-width: 960px){
     .conteiner{  
     display: block;
@@ -274,7 +319,7 @@ ul{
     width: 27px;
     height: 27px;
     padding: 4px;
-    position: fixed;
+    position: absolute;
 }
 .selopromo{
     margin-bottom: 10px;
@@ -320,6 +365,10 @@ ul{
     margin-top: -1px;
 }
 img {
-            max-width: 500%;
+    max-width: 500%;
             
-        }
+}
+
+.sublinhado {
+    background-color: yellow;
+  }
