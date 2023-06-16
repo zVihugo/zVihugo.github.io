@@ -242,12 +242,10 @@ ul{
     font-family: Arial, Helvetica, sans-serif;
 }
 .testeDialog{
-    top: 50%;
-    left: 45%;
-    height: 300px;
+    left: 50%;
+    bottom: 50%;
+    height: 50px;
     position: absolute;
-    justify-content: center;
-    align-items: center;
     display: none;
     background-color: beige;
 }
