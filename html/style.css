@@ -247,7 +247,9 @@ ul{
 .testeDialog{
     left: 50%;
     bottom: 50%;
-    height: 50px;
+    width: 200px;
+    height: 200px;
+    justify-content: center;
     position: absolute;
     display: none;
     background-color: beige;
@@ -373,3 +375,6 @@ img {
 .sublinhado {
     background-color: yellow;
 }
+
+/*Projeto Realizado pelos Alunos: Victor Moreira e Gustavo Yuusuke
+Professor: Willian Watanabe */

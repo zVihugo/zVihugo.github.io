@@ -165,3 +165,6 @@ class Publicacoes {
 
 const menu = new Menu();
 const publicacoes = new Publicacoes();
+
+//Projeto Realizado pelos Alunos: Victor Moreira e Gustavo Yuusuke
+//Professor: Willian Watanabe
