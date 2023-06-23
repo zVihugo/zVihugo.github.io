@@ -23,7 +23,7 @@ li{
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     list-style-type: none;
-    padding-left: -20px;
+    padding-left: 20px;
     font-size: small;
 }
 ul{
@@ -142,13 +142,13 @@ ul{
 .cima{
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
-    transition: trasnform 0.2s ease-in-out;
+    transition: transform 0.2s ease-in-out;
 }
 
 .baixob{
     color: black;
     background-color: white;
-    transition: trasnform 0.2s ease-in-out;
+    transition: transform 0.2s ease-in-out;
 }
 
 .cad:hover{
@@ -375,6 +375,3 @@ img {
 .sublinhado {
     background-color: yellow;
 }
-
-/*Projeto Realizado pelos Alunos: Victor Moreira e Gustavo Yuusuke
-Professor: Willian Watanabe */
