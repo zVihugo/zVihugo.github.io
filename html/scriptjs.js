@@ -87,11 +87,13 @@ class Publicacoes {
     const alterar = document.createElement("button");
 
     exl.style.width = "150px";
+    exl.style.color = "white";
     exl.style.backgroundColor = "brown";
     alterar.style.width = "150px";
     alterar.style.backgroundColor = "grey";
 
     tilt.innerHTML = postagem.titulo;
+    img.alt = postagem.titulo;
     de.innerHTML = postagem.descricao;
     img.src = postagem.imagem;
     img.style.width = "300px";
