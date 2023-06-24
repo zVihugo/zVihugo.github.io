@@ -1,6 +1,6 @@
-class Menu {
+class Dialog {
   constructor() {
-    this.menuElement = document.querySelector('.testeDialog');
+    this.dialogElement = document.querySelector('.testeDialog');
     this.aparecerElement = document.querySelector('#meubotao');
     this.desaparecerElement = document.querySelector('.btnSair');
     this.aparecerElement.addEventListener('click', this.aparecer.bind(this));
@@ -8,11 +8,11 @@ class Menu {
   }
 
   aparecer() {
-    this.menuElement.style.display = 'block';
+    this.dialogElement.style.display = 'block';
   }
 
   desaparecer() {
-    this.menuElement.style.display = 'none';
+    this.dialogElement.style.display = 'none';
   }
 }
 
@@ -40,7 +40,18 @@ class Publicacoes {
     this.btnAdd.addEventListener('click', this.adicionar.bind(this));
     this.pesquisar.addEventListener('click', this.pesquisarPublicacao.bind(this));
     window.addEventListener("load", this.preencherPublicacoes.bind(this));
+    this.carregarPublicacoes();
   }
+
+  exibirMensagemErro(mensagem) {
+    const mensagemErroElement = document.querySelector('.erro');
+    mensagemErroElement.textContent = mensagem;
+    mensagemErroElement.style.display = 'block';
+  
+    setTimeout(() => {
+      mensagemErroElement.style.display = 'none';
+    }, 3000); 
+  }  
 
   adicionar() {
     const titulo = this.addTilt.value;
@@ -49,7 +60,7 @@ class Publicacoes {
     const data = this.addData.value;
 
     if (titulo === '' || descricao === '' || imagem === '' || data === '') {
-      alert('Não é possível criar publicação, existem campos vazios.');
+      this.exibirMensagemErro('Não é possível criar publicação, existem campos vazios.');
       return;
     }
 
@@ -60,9 +71,10 @@ class Publicacoes {
 
     const novaPostagem = new Postagem(titulo, descricao, imagem, data);
     this.publicacoes.push(novaPostagem);
-    localStorage.setItem("publicacoes", JSON.stringify(this.publicacoes));
 
     this.criarElementoPost(novaPostagem);
+
+    this.atualizarLocalStorage();
   }
 
   criarElementoPost(postagem) {
@@ -132,36 +144,58 @@ class Publicacoes {
     exl.addEventListener("click", () => {
       const index = this.publicacoes.indexOf(postagem);
       this.publicacoes.splice(index, 1);
-      localStorage.setItem("publicacoes", JSON.stringify(this.publicacoes));
       containerPosts.removeChild(post);
+      this.atualizarLocalStorage();
     });
   }
 
+  atualizarElementoPost(elemento, postagem) {
+    const tilt = elemento.querySelector("h1");
+    const de = elemento.querySelector("p");
+    const img = elemento.querySelector("img");
+    const dataAt = elemento.querySelector("p");
+
+    tilt.innerHTML = postagem.titulo;
+    de.innerHTML = postagem.descricao;
+    img.src = postagem.imagem;
+    dataAt.innerHTML = postagem.data;
+  }
+
   preencherPublicacoes() {
+    this.publicacoes.forEach((publicacao) => {
+      this.criarElementoPost(publicacao);
+    });
+  }
+
+  carregarPublicacoes() {
     if (localStorage.getItem("publicacoes")) {
       this.publicacoes = JSON.parse(localStorage.getItem("publicacoes"));
-      this.publicacoes.forEach((publicacao) => {
-        this.criarElementoPost(publicacao);
-      });
     }
+  }
+
+  atualizarLocalStorage() {
+    localStorage.setItem("publicacoes", JSON.stringify(this.publicacoes));
   }
 
   pesquisarPublicacao() {
     const palavraChave = this.caixaTexto.value.toLowerCase();
     const posts = document.querySelectorAll('.post');
-
+  
     posts.forEach((post) => {
-      const conteudo = post.innerHTML.toLowerCase();
-      if (conteudo.includes(palavraChave)) {
-        const conteudoSublinhado = conteudo.replace(
-          new RegExp(palavraChave, 'gi'),
-          (match) => `<span class="sublinhado">${match}</span>`
-        );
-        post.innerHTML = conteudoSublinhado;
+      const titulo = post.querySelector('h1').innerHTML.toLowerCase();
+      const descricao = post.querySelector('p').innerHTML.toLowerCase();
+      const conteudo = titulo + descricao;
+  
+      if (palavraChave === '') {
+        post.style.display = 'block';
+      } else if (conteudo.includes(palavraChave)) {
+        post.style.display = 'block';
+      } else {
+        post.style.display = 'none';
       }
     });
   }
 }
 
-const menu = new Menu();
+const dialog = new Dialog();
 const publicacoes = new Publicacoes();

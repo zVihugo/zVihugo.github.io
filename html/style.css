@@ -130,7 +130,7 @@ ul{
     margin: 0;
 }
 .baixo{
-   display: flex;
+    display: flex;
    padding-left: 250px;
    color: black;
    background-color: white;
@@ -244,6 +244,20 @@ ul{
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
 }
+.erro {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: url(touro.jpg);
+    color: #af1111;
+    font-size: 25px;
+    padding: 10px;
+    border-radius: 5px;
+    display: none;
+    width: 500px;
+    height: 500px;
+}   
 .testeDialog{
     left: 50%;
     bottom: 50%;
