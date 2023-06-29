@@ -22,6 +22,7 @@ class Postagem {
     this.descricao = descricao;
     this.imagem = imagem;
     this.data = data;
+    this.indice = -1; // Adicionando o atributo índice para controlar a posição da postagem
   }
 }
 
@@ -39,19 +40,21 @@ class Publicacoes {
 
     this.btnAdd.addEventListener('click', this.adicionar.bind(this));
     this.pesquisar.addEventListener('click', this.pesquisarPublicacao.bind(this));
-    window.addEventListener("load", this.preencherPublicacoes.bind(this));
-    this.carregarPublicacoes();
+    window.addEventListener("load", () => {
+      this.carregarPublicacoes();
+      this.preencherPublicacoes();
+    });
   }
 
   exibirMensagemErro(mensagem) {
     const mensagemErroElement = document.querySelector('.erro');
     mensagemErroElement.textContent = mensagem;
     mensagemErroElement.style.display = 'block';
-  
+
     setTimeout(() => {
       mensagemErroElement.style.display = 'none';
-    }, 3000); 
-  }  
+    }, 3000);
+  }
 
   adicionar() {
     const titulo = this.addTilt.value;
@@ -70,7 +73,14 @@ class Publicacoes {
     this.addData.value = '';
 
     const novaPostagem = new Postagem(titulo, descricao, imagem, data);
-    this.publicacoes.push(novaPostagem);
+
+    // Verifica se a postagem já existe no vetor
+    const index = novaPostagem.indice;
+    if (index !== -1) {
+      this.publicacoes[index] = novaPostagem;
+    } else {
+      this.publicacoes.push(novaPostagem);
+    }
 
     this.criarElementoPost(novaPostagem);
 
@@ -113,7 +123,7 @@ class Publicacoes {
     containerPosts.appendChild(post);
 
     alterar.addEventListener("click", () => {
-      menu.aparecer();
+      dialog.aparecer();
       this.addTilt.value = postagem.titulo;
       this.addDesc.value = postagem.descricao;
       this.addImg.value = postagem.imagem;
@@ -132,14 +142,14 @@ class Publicacoes {
         postagem.imagem = novaImagem;
         postagem.data = novaData;
 
-        localStorage.setItem("publicacoes", JSON.stringify(this.publicacoes));
+        this.atualizarElementoPost(post, postagem);
 
         this.addTilt.value = '';
         this.addDesc.value = '';
         this.addImg.value = '';
         this.addData.value = '';
 
-        this.btnAdd.removeEventListener('click');
+        this.btnAdd.removeEventListener("click", this.adicionar.bind(this));
       });
     });
 
@@ -161,6 +171,8 @@ class Publicacoes {
     de.innerHTML = postagem.descricao;
     img.src = postagem.imagem;
     dataAt.innerHTML = postagem.data;
+
+    this.atualizarLocalStorage();
   }
 
   preencherPublicacoes() {
@@ -182,12 +194,12 @@ class Publicacoes {
   pesquisarPublicacao() {
     const palavraChave = this.caixaTexto.value.toLowerCase();
     const posts = document.querySelectorAll('.post');
-  
+
     posts.forEach((post) => {
       const titulo = post.querySelector('h1').innerHTML.toLowerCase();
       const descricao = post.querySelector('p').innerHTML.toLowerCase();
       const conteudo = titulo + descricao;
-  
+
       if (palavraChave === '') {
         post.style.display = 'block';
       } else if (conteudo.includes(palavraChave)) {
