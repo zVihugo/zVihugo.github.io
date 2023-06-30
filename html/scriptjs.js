@@ -15,15 +15,17 @@ class Dialog {
     this.dialogElement.style.display = 'none';
   }
 }
+
 class Postagem {
   constructor(titulo, descricao, imagem, data) {
     this.titulo = titulo;
     this.descricao = descricao;
     this.imagem = imagem;
     this.data = data;
-    this.indice = -1;
+    this.indice = -1; // Adicionando o atributo índice para controlar a posição da postagem
   }
 }
+
 class Publicacoes {
   constructor() {
     this.conteudoElement = document.querySelector('.container-posts');
@@ -71,6 +73,8 @@ class Publicacoes {
     this.addData.value = '';
 
     const novaPostagem = new Postagem(titulo, descricao, imagem, data);
+
+    // Verifica se a postagem já existe no vetor
     const index = novaPostagem.indice;
     if (index !== -1) {
       this.publicacoes[index] = novaPostagem;
@@ -119,34 +123,7 @@ class Publicacoes {
     containerPosts.appendChild(post);
 
     alterar.addEventListener("click", () => {
-      dialog.aparecer();
-      this.addTilt.value = postagem.titulo;
-      this.addDesc.value = postagem.descricao;
-      this.addImg.value = postagem.imagem;
-      this.addData.value = postagem.data;
-
-      this.btnAdd.removeEventListener('click', this.adicionar.bind(this));
-
-      this.btnAdd.addEventListener('click', () => {
-        const novoTitulo = this.addTilt.value;
-        const novaDescricao = this.addDesc.value;
-        const novaImagem = this.addImg.value;
-        const novaData = this.addData.value;
-
-        postagem.titulo = novoTitulo;
-        postagem.descricao = novaDescricao;
-        postagem.imagem = novaImagem;
-        postagem.data = novaData;
-
-        this.atualizarElementoPost(post, postagem);
-
-        this.addTilt.value = '';
-        this.addDesc.value = '';
-        this.addImg.value = '';
-        this.addData.value = '';
-
-        this.btnAdd.removeEventListener("click", this.adicionar.bind(this));
-      });
+      this.alterarPublicacao(postagem);
     });
 
     exl.addEventListener("click", () => {
@@ -157,16 +134,57 @@ class Publicacoes {
     });
   }
 
-  atualizarElementoPost(elemento, postagem) {
-    const tilt = elemento.querySelector("h1");
-    const de = elemento.querySelector("p");
-    const img = elemento.querySelector("img");
-    const dataAt = elemento.querySelector("p");
+  alterarPublicacao(postagem) {
+    dialog.aparecer();
+    this.addTilt.value = postagem.titulo;
+    this.addDesc.value = postagem.descricao;
+    this.addImg.value = postagem.imagem;
+    this.addData.value = postagem.data;
 
-    tilt.innerHTML = postagem.titulo;
-    de.innerHTML = postagem.descricao;
-    img.src = postagem.imagem;
-    dataAt.innerHTML = postagem.data;
+    const botaoAlterar = document.createElement('button');
+    botaoAlterar.textContent = 'Salvar Alterações';
+    botaoAlterar.addEventListener('click', () => {
+      const novoTitulo = this.addTilt.value;
+      const novaDescricao = this.addDesc.value;
+      const novaImagem = this.addImg.value;
+      const novaData = this.addData.value;
+
+      postagem.titulo = novoTitulo;
+      postagem.descricao = novaDescricao;
+      postagem.imagem = novaImagem;
+      postagem.data = novaData;
+
+      this.atualizarElementoPost(postagem);
+
+      dialog.desaparecer();
+
+      this.btnAdd.removeEventListener('click', this.adicionar.bind(this));
+      this.btnAdd.addEventListener('click', this.adicionar.bind(this));
+    });
+
+    const containerForm = document.querySelector('.form-container');
+    containerForm.appendChild(botaoAlterar);
+
+    dialog.desaparecer();
+  }
+
+  atualizarElementoPost(postagem) {
+    const post = document.querySelector('.container-posts');
+    const posts = Array.from(post.children);
+    const index = this.publicacoes.indexOf(postagem);
+
+    if (index !== -1) {
+      const elemento = posts[index];
+      const tilt = elemento.querySelector('h1');
+      const de = elemento.querySelector('p');
+      const img = elemento.querySelector('img');
+      const dataAt = elemento.querySelector('p');
+
+      tilt.innerHTML = postagem.titulo;
+      de.innerHTML = postagem.descricao;
+      img.src = postagem.imagem;
+      dataAt.innerHTML = postagem.data;
+    }
 
     this.atualizarLocalStorage();
   }
@@ -192,6 +210,7 @@ class Publicacoes {
     if (palavraChave.trim() === '') {
       return;
     }
+    
     const posts = document.querySelectorAll('.post');
     posts.forEach((post) => {
       const titulo = post.querySelector('h1').innerHTML.toLowerCase();
@@ -204,6 +223,7 @@ class Publicacoes {
         post.style.display = 'none';
       }
     });
-  }  
+  }
 }
 const dialog = new Dialog();
+const publicacoes = new Publicacoes();
