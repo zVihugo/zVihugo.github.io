@@ -15,17 +15,15 @@ class Dialog {
     this.dialogElement.style.display = 'none';
   }
 }
-
 class Postagem {
   constructor(titulo, descricao, imagem, data) {
     this.titulo = titulo;
     this.descricao = descricao;
     this.imagem = imagem;
     this.data = data;
-    this.indice = -1; // Adicionando o atributo índice para controlar a posição da postagem
+    this.indice = -1;
   }
 }
-
 class Publicacoes {
   constructor() {
     this.conteudoElement = document.querySelector('.container-posts');
@@ -73,8 +71,6 @@ class Publicacoes {
     this.addData.value = '';
 
     const novaPostagem = new Postagem(titulo, descricao, imagem, data);
-
-    // Verifica se a postagem já existe no vetor
     const index = novaPostagem.indice;
     if (index !== -1) {
       this.publicacoes[index] = novaPostagem;
@@ -193,23 +189,21 @@ class Publicacoes {
 
   pesquisarPublicacao() {
     const palavraChave = this.caixaTexto.value.toLowerCase();
+    if (palavraChave.trim() === '') {
+      return;
+    }
     const posts = document.querySelectorAll('.post');
-
     posts.forEach((post) => {
       const titulo = post.querySelector('h1').innerHTML.toLowerCase();
       const descricao = post.querySelector('p').innerHTML.toLowerCase();
       const conteudo = titulo + descricao;
-
-      if (palavraChave === '') {
-        post.style.display = 'block';
-      } else if (conteudo.includes(palavraChave)) {
+  
+      if (conteudo.includes(palavraChave)) {
         post.style.display = 'block';
       } else {
         post.style.display = 'none';
       }
     });
-  }
+  }  
 }
-
 const dialog = new Dialog();
-const publicacoes = new Publicacoes();
